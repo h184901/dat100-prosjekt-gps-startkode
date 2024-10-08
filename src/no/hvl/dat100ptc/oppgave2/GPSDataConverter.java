@@ -10,31 +10,38 @@ public class GPSDataConverter {
 
 	public static int toSeconds(String timestr) {
 		
+		//"2017-08-13T08:52:26.000Z"
+		
 		int secs;
 		int hr, min, sec;
 		
-		String timer = timestr.substring(0,1);
+		String timer = timestr.substring(11,13);
 		hr = Integer.parseInt(timer);
 		
-		String minutter = timestr.substring(9,11); 
+		String minutter = timestr.substring(14,16); 
 		min = Integer.parseInt(minutter);
 		
-		String sekunder = timestr.substring(22,24);
+		String sekunder = timestr.substring(17,19);
 		sec = Integer.parseInt(sekunder);
 		
 		secs = (hr *3600) + (min*60) + sec;
 	
 		return secs;
-		
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
 		GPSPoint gpspoint;
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
 		
+		int tid = toSeconds(timeStr);
+		double breddegrad = Double.parseDouble(latitudeStr);
+		double lengdegrad = Double.parseDouble(longitudeStr);
+		double hoyde = Double.parseDouble(elevationStr);
+		
+		gpspoint = new GPSPoint(tid, breddegrad, lengdegrad, hoyde);
+		
+		return gpspoint;
+	
 	}
 	
 }
