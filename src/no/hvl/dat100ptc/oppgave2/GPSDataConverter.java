@@ -13,8 +13,18 @@ public class GPSDataConverter {
 		int secs;
 		int hr, min, sec;
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		String timer = timestr.substring(0,1);
+		hr = Integer.parseInt(timer);
+		
+		String minutter = timestr.substring(9,11); 
+		min = Integer.parseInt(minutter);
+		
+		String sekunder = timestr.substring(22,24);
+		sec = Integer.parseInt(sekunder);
+		
+		secs = (hr *3600) + (min*60) + sec;
+	
+		return secs;
 		
 	}
 
