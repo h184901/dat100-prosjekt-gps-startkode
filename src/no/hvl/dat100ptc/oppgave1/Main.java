@@ -4,8 +4,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		// TODO
-		
+		GPSPoint nyGPS = new GPSPoint(1, 2.0, 3.0, 5.0);
+		nyGPS.getTime();
+		nyGPS.setTime(2);
+		System.out.println(nyGPS.toString());
 	}
 
 }
