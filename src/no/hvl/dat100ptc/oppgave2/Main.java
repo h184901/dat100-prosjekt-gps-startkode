@@ -4,7 +4,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
 public class Main {
 
-	
+	GPSPoint 
 	public static void main(String[] args) {
 
 		// TODO

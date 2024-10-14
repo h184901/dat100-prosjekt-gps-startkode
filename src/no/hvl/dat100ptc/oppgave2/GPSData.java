@@ -22,17 +22,16 @@ public class GPSData {
 	
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
-		//boolean inserted = false;
+		boolean inserted = false;
 		
 		if(antall < gpspoints.length) {
 			gpspoints[antall] = gpspoint;
 			
 			antall++;
 			return true;
+		}else { 
+			return inserted;
 			
-			
-		}else {
-			return false;
 		}
 		
 		 
@@ -42,17 +41,27 @@ public class GPSData {
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
 		GPSPoint gpspoint;
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
+		
+		gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation);
+		
+		insertGPS(gpspoint);
+		
+		return true;
 		
 	}
 
 	public void print() {
 
-		throw new UnsupportedOperationException(TODO.method());
+		System.out.println("====== GPS Data - START ======");
+		
+		for (int i = 0; i < antall; i++) {
+			GPSPoint point = gpspoints[i];
+			System.out.print((i + 1) + " " + point.toString());
+			
+		}
+		
+		System.out.println("====== GPS Data - SLUTT ======");
+	
 
-		// TODO 
 	}
 }
