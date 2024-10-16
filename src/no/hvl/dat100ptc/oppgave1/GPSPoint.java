@@ -29,13 +29,10 @@ public class GPSPoint {
 		this.time = time;
 				
 		
-		
 	}
 
 	public double getLatitude() {
 		return latitude;
-		
-	
 		
 		
 	}
