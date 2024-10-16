@@ -116,9 +116,9 @@ public class GPSUtils {
 		
 		secs = secs2 - secs1;
 		
-		double avstand = distance(gpspoint1,gpspoint2);
+		double distance = distance(gpspoint1,gpspoint2);
 		
-		speed = avstand/secs;
+		speed = distance/secs;
 		
 		return speed;
 	
@@ -130,9 +130,13 @@ public class GPSUtils {
 		String timestr;
 		String TIMESEP = ":";
 
-		throw new UnsupportedOperationException(TODO.method());
+		int hours = secs / 3600;
+		int minutes = (secs & 3600) / 60;
+		int seconds = secs % 60;
 		
-		// TODO 
+		
+		timestr = String.format("   ", TIMESEP, hours, minutes, seconds);
+		return timestr;
 		
 	}
 	
