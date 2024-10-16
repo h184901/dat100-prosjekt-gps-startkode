@@ -26,24 +26,35 @@ public class GPSUtils {
 
 		double min;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		min = da[0];
+		
+		for(double d : da) {
+			if(d < min) {
+				min = d;
+			}
+		}
+		return min;
 		
 	}
 
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		double[]latitudes = new double[gpspoints.length];
+				
+				for(int i = 0; i < gpspoints.length; i++) {
+					latitudes[i] = gpspoints[i].getLatitude();
+				}
+		return latitudes;
 		
-		// TODO
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
+		double[]longitudes = new double[gpspoints.length];
+		
+		for(int i = 0; i < gpspoints.length; i++) {
+			longitudes[i] = gpspoints[i].getLongitude();
+		}
+		return longitudes;
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
 
 	}
 
@@ -53,28 +64,44 @@ public class GPSUtils {
 
 		double d;
 		double latitude1, longitude1, latitude2, longitude2;
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
+		
+		latitude1 = gpspoint1.getLatitude();
+		longitude1 = gpspoint1.getLongitude();
+		latitude2 = gpspoint2.getLatitude();
+		longitude2 = gpspoint2.getLongitude();
+		
+		
+		double phi1 = Math.toRadians(latitude1);
+		double phi2 = Math.toRadians(latitude2);
+		double deltaphi = Math.toRadians(latitude2 - latitude1);
+		double deltadelta = Math.toRadians(longitude2 - longitude1);
+		
+		double a = compute_a(phi1, phi2, deltaphi, deltadelta);
+		
+		double c = compute_c(a);
+		
+		d = R * c;
+		
+		return d;
+		
+		
 	}
 	
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
-	
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO 
+		double a  = Math.pow(Math.sin(deltaphi / 2), 2) + 
+				 	Math.cos(phi1) * Math.cos(phi2) *
+				 	Math.pow(Math.sin(deltadelta / 2), 2);
+				 	
+		return a;
 
 	}
 
 	private static double compute_c(double a) {
-
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		
-		// TODO 
-
+		return c;
+	
 	}
 
 	
@@ -83,9 +110,18 @@ public class GPSUtils {
 		int secs;
 		double speed;
 		
-		throw new UnsupportedOperationException(TODO.method());
+
+		int secs1 = gpspoint1.getTime();
+		int secs2 = gpspoint2.getTime();
 		
-		// TODO
+		secs = secs2 - secs1;
+		
+		double avstand = distance(gpspoint1,gpspoint2);
+		
+		speed = avstand/secs;
+		
+		return speed;
+	
 
 	}
 
