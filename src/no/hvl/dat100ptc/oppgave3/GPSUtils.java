@@ -131,13 +131,11 @@ public class GPSUtils {
 		String TIMESEP = ":";
 
 		int hours = secs / 3600;
-		int minutes = (secs & 3600) / 60;
+		int minutes = (secs % 3600) / 60;
 		int seconds = secs % 60;
-		
-		
-		timestr = String.format("   ", TIMESEP, hours, minutes, seconds);
-		return timestr;
-		
+	
+		 timestr = String.format("%02d%s%02d%s%02d", hours, TIMESEP, minutes, TIMESEP, seconds);
+	     return String.format("%10s", timestr);
 	}
 	
 	private static int TEXTWIDTH = 10;
@@ -145,11 +143,13 @@ public class GPSUtils {
 	public static String formatDouble(double d) {
 
 		String str;
-
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double rounded = Math.round(d * 100)/100.0;
 		
-		// TODO
+		str = String.format("%.2f", rounded).replace(',', '.');
+		
+		return String.format("%" + TEXTWIDTH + "s", str);
+	
 		
 	}
 }
