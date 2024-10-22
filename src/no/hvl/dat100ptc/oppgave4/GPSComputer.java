@@ -118,45 +118,64 @@ public class GPSComputer {
 
 		double met = 0;		
 		double speedmph = speed * MS;
+		double t = secs/3600.0;
+
 		
 		if (speedmph < 10) {
 			met = 4.0;
-		}else if (speedmph < 12) {
+		}else if (speedmph <= 12) {
 			met = 6.0;
-		}else if (speedmph < 14) {
+		}else if (speedmph <= 14) {
 			met = 8.0;
-		}else if (speedmph < 16) {
+		}else if (speedmph <= 16) {
 			met = 10.0;
-		}else if (speedmph < 18) {
+		}else if (speedmph <= 20) {
 			met = 12.0;
 		}else {
 			met = 16.0;
 		}
 		
-		double t = secs/3600;
 		
 		kcal = met * weight * t; 
 
 		return kcal;
-		
 	}
 
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0;
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		
+		double[] speed = speeds();
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			int time = gpspoints[i+1].getTime() - gpspoints[i].getTime();
+			totalkcal += kcal(weight, time, speed[i]);	
+		}
+		
+		return totalkcal;
+		
 		
 	}
 	
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
 		
+	String time = GPSUtils.formatTime(totalTime());
+	double distance = totalDistance();
+	double elevation = totalElevation();
+	double maxspeed = maxSpeed();
+	double averagespeed = averageSpeed();
+	double energy = totalKcal(WEIGHT);
+	
+	System.out.println("==============================================");
+	System.out.printf("Total time     :   %s\n", time);
+	System.out.printf("Total distance :   %8.2f km\n", distance);
+	System.out.printf("Total elevation:   %8.2f m\n", elevation);
+	System.out.printf("Max speed      :   %8.2f km/t\n", maxspeed);
+	System.out.printf("Average speed  :   %8.2f km/t\n", averagespeed);
+	System.out.printf("Energy         :   %8.2f kcal\n", energy);
+	System.out.println("==============================================");
+	
 	}
 
 }
