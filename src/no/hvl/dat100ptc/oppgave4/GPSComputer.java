@@ -31,25 +31,40 @@ public class GPSComputer {
 
 		double distance = 0;
 
-		throw new UnsupportedOperationException(TODO.method());
+		    
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			GPSPoint point1 = gpspoints[i];
+		    GPSPoint point2 = gpspoints[i + 1];
+		    
+		    distance += GPSUtils.distance(point1, point2);
+		        }
 
-		// TODO
-
-	}
+		        return distance;
+		    }
+		
+	
 
 	public double totalElevation() {
 
-		double elevation = 0;
-
-		throw new UnsupportedOperationException(TODO.method());
+		double totalElevation = 0;
 		
-		// TODO 
+		
+		
+		for (int i = 0; i < gpspoints.length -1; i++) {
+			
+			totalElevation += GPSPoint.getElevation();
+			
+		}
+
+		return totalElevation;
+		
+		
 		
 	}
 
 	public int totalTime() {
 
-		// TODO
+		
 		throw new UnsupportedOperationException(TODO.method());
 		
 	}
@@ -59,27 +74,36 @@ public class GPSComputer {
 
 		double[] speeds = new double[gpspoints.length-1];
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		for(int i = 0; i<speeds.length ; i++) {
+			GPSPoint point1 = gpspoints[i];
+			GPSPoint point2= gpspoints[i + 1];
+			
+			speeds[i] = GPSUtils.speed(point1, point2);
+		}
+		
+		return speeds;
 		
 	}
 	
 	public double maxSpeed() {
 		
-		double maxspeed = 0;
 		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		
+		
+		
+			
+		}
+		
+
 	
-	}
+	
+	
 
 	public double averageSpeed() {
 
 		double average = 0;
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-		
+		return averagespeed;
 	}
 
 
@@ -102,9 +126,18 @@ public class GPSComputer {
 
 		double totalkcal = 0;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			GPSPoint point1 = gpspoints[i];
+			GPSPoint point2 = gpspoints[i + 1];
+
+			int secs = point2.getTime() - point1.getTime();
+			double speed = GPSUtils.speed(point1, point2);
+
+			totalkcal += kcal(WEIGHT, secs, speed);
+			return totalkcal;
 		
+			
+		}
 	}
 	
 	private static double WEIGHT = 80.0;

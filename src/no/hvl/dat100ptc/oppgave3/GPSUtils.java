@@ -129,10 +129,8 @@ public class GPSUtils {
 
 		String timestr;
 		String TIMESEP = ":";
-
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO 
+		
 		
 	}
 	
